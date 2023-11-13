@@ -13,12 +13,16 @@ HELP.md
 .sts4-cache
 
 ### IntelliJ IDEA ###
-!target/*
-!.mvn/*
+/target
 .idea
+.mvn
 *.iws
 *.iml
 *.ipr
+*.classpath
+*.class
+*.lst
+*.jar
 
 ### NetBeans ###
 /nbproject/private/
@@ -31,4 +35,4 @@ build/
 !**/src/test/**/build/
 
 ### VS Code ###
-.vscode/
+.vscode/!/.mvn/
