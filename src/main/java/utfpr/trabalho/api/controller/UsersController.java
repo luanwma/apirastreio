@@ -1,6 +1,6 @@
 package utfpr.trabalho.api.controller;
 
-import utfpr.trabalho.api.model.UsersModel;
+import utfpr.trabalho.api.model.user.UsersModel;
 import utfpr.trabalho.api.repository.UsersRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
