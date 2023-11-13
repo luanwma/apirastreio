@@ -15,7 +15,6 @@ HELP.md
 ### IntelliJ IDEA ###
 /target
 .idea
-.mvn
 *.iws
 *.iml
 *.ipr
