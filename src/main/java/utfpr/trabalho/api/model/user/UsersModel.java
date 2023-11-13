@@ -2,6 +2,7 @@ package utfpr.trabalho.api.model.user;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,16 +47,43 @@ public class UsersModel implements UserDetails {
     private String phoneNumber;
 
     @Column
+    @CreatedDate
     private LocalDateTime createdAt ;
 
-    @Column
+    @Column(name = "isActive" ,columnDefinition = "" )
     private boolean isActive;
 
+
+    @Column
     private UserRole role;
 
     public UsersModel(String login, String password, UserRole role){
         this.login = login;
         this.password = password;
+        this.role = role;
+    }
+
+    public UsersModel(String login, String password, UserRole role,
+                      String cpf, String firstName, String lastName, Date birthDate, String phoneNumber){
+        this.login = login;
+        this.password = password;
+        this.role = role;
+        this.cpf = cpf;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public UsersModel(String cpf, String firstName, String lastName, Date birthDate,
+                      String email, String login, String password, String phoneNumber, UserRole role) {
+        this.cpf = cpf;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.email = email;
+        this.login = login;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
         this.role = role;
     }
 
@@ -87,6 +115,6 @@ public class UsersModel implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

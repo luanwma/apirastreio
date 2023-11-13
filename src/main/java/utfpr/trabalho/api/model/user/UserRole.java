@@ -1,5 +1,9 @@
 package utfpr.trabalho.api.model.user;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+
 public enum UserRole {
     ADMIN("admin") {
         @Override
@@ -21,4 +25,6 @@ public enum UserRole {
     }
 
     public abstract String getRole();
+
+
 }
