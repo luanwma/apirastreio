@@ -1,4 +1,4 @@
 package utfpr.trabalho.api.model.tracking;
 
-public class TrackingRequestDTO {
+public record TrackingRequestDTO(String codeTracking) {
 }
