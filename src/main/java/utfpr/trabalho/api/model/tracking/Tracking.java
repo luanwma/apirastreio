@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import utfpr.trabalho.api.model.event.Event;
+import utfpr.trabalho.api.model.user.UsersModel;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 @Entity(name = "tracking")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tracking {
+public class Tracking  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +23,13 @@ public class Tracking {
 
     @Column
     private String codeTrackging;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private UsersModel user;
+
+
+    @Column
+    private int timeInterval;
 
     @Column
     @CreatedDate
@@ -35,6 +43,7 @@ public class Tracking {
         lastUpdate = LocalDateTime.now();
     }
 
+   // @JoinColumn
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private ArrayList<Event> events = new ArrayList<>();
 

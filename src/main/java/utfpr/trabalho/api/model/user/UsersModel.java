@@ -6,8 +6,10 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import utfpr.trabalho.api.model.tracking.Tracking;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -57,13 +59,18 @@ public class UsersModel implements UserDetails {
     @Column
     private UserRole role;
 
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private ArrayList<Tracking> listTrackings = new ArrayList<>();
+
+
     public UsersModel(String login, String password, UserRole role){
         this.login = login;
         this.password = password;
         this.role = role;
     }
 
-    public UsersModel(String login, String password, UserRole role,
+  /*  public UsersModel(String login, String password, UserRole role,
                       String cpf, String firstName, String lastName, Date birthDate, String phoneNumber){
         this.login = login;
         this.password = password;
@@ -72,7 +79,7 @@ public class UsersModel implements UserDetails {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
-    }
+    }*/
 
     public UsersModel(String cpf, String firstName, String lastName, Date birthDate,
                       String email, String login, String password, String phoneNumber, UserRole role) {
