@@ -31,7 +31,8 @@ public class Event {
 
     //private Location destinyLocation;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "tracking_id")
     private Tracking tracking;
 
 

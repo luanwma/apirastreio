@@ -10,6 +10,7 @@ import utfpr.trabalho.api.model.user.UsersModel;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity(name = "tracking")
@@ -22,11 +23,22 @@ public class Tracking  {
     private Integer id;
 
     @Column
-    private String codeTrackging;
+    private String codeTracking;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private UsersModel user;
 
+    // Construtores, getters e setters
+
+    // Métodos para obter e definir o usuário
+    public UsersModel getUser() {
+        return user;
+    }
+
+    public void setUser(UsersModel user) {
+        this.user = user;
+    }
 
     @Column
     private int timeInterval;
@@ -44,8 +56,17 @@ public class Tracking  {
     }
 
    // @JoinColumn
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private ArrayList<Event> events = new ArrayList<>();
+   @OneToMany(mappedBy = "tracking", cascade = CascadeType.ALL, orphanRemoval = true)
+   private List<Event> events = new ArrayList<>();
 
+
+    public void addEvent(Event event) {
+        events.add(event);
+        event.setTracking(this);
+    }
+    public void removeEvent(Event event) {
+        events.remove(event);
+        event.setTracking(null);
+    }
 
 }
