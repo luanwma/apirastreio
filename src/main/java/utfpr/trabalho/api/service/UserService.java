@@ -15,10 +15,6 @@ public class UserService {
 
     private final UsersRepository usersRepository;
 
-    public UserService(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
-    }
-
     @PostConstruct
     public void addUserDefault() {
         addDefaultAdmin();
@@ -68,5 +64,9 @@ public class UserService {
         userDefaultUser.setActive(true);
 
         usersRepository.save(userDefaultUser);
+    }
+
+    public UserService(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
     }
 }
