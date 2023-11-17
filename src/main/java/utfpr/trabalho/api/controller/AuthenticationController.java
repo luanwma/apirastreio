@@ -57,13 +57,14 @@ public class AuthenticationController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("delete/{id}")
-    public ResponseEntity deleteUser(@PathVariable Integer id){
-        Optional<UsersModel> usersModelOptional = usersRepository.findById(id);
-        if(usersModelOptional.isPresent()){
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
+        Optional<UsersModel> userOptional = usersRepository.findById(id);
+
+        if (userOptional.isPresent()) {
             usersRepository.deleteById(id);
             return ResponseEntity.ok().build();
-        }else{
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
