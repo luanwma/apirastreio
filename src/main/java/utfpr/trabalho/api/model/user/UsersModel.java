@@ -61,14 +61,30 @@ public class UsersModel implements UserDetails {
 //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 //    private ArrayList<Tracking> listTrackings = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Tracking> trackings = new ArrayList<>();
 
+    // Construtores, getters e setters
+
+    // Métodos para adicionar e remover tracking
+    public void addTracking(Tracking tracking) {
+        trackings.add(tracking);
+        tracking.setUser(this);
+    }
+
+    public void removeTracking(Tracking tracking) {
+        trackings.remove(tracking);
+        tracking.setUser(null);
+    }
+
+    /*
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private transient List<Tracking> listTrackings = new ArrayList<>();
   //  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
    // private ArrayList<Tracking> listTrackings = new ArrayList<>();
 
 
-
+    */
     public UsersModel(String login, String password, UserRole role){
         this.login = login;
         this.password = password;

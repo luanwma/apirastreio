@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import utfpr.trabalho.api.repository.UsersRepository;
@@ -20,21 +21,37 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Autowired
     TokenService tokenService;
-
     @Autowired
-    UsersRepository usersRepository;
+    private UserDetailsService userDetailsService;
+    @Autowired
+    private UsersRepository usersRepository ;
 
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token = this.recoverToken(request);
         if(token != null){
-            var login = tokenService.validateToken(token);
+            try{
+                String login = tokenService.validateToken(token);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(login);
+
+                UsernamePasswordAuthenticationToken authentication =
+                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                System.out.println("passou aqui + "+ authentication);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                System.out.println("chegou aqui");
+            }catch (Exception e){
+                // Lidar com exceções durante a validação do token (por exemplo, token expirado)
+                SecurityContextHolder.clearContext();
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token inválido");
+                return;
+            }
+           /* var login = tokenService.validateToken(token);
             UserDetails user = usersRepository.findByLogin(login);
             System.out.println("user em do filter internal "+user.getUsername());
 
             var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            SecurityContextHolder.getContext().setAuthentication(authentication); */
 
 
         }else{

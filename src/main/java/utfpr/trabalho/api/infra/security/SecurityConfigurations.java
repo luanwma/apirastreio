@@ -3,6 +3,7 @@ package utfpr.trabalho.api.infra.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -13,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
+import org.springframework.web.bind.annotation.RequestHeader;
 
 
 @Configuration
@@ -35,6 +36,8 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/user/del").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/auth/del").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/tracking/getAllTrackings/{id}").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/tracking/save", HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS).authenticated()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
