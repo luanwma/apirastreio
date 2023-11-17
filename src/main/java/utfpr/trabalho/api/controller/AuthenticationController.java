@@ -41,7 +41,7 @@ public class AuthenticationController {
 
     }
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
+    public ResponseEntity register(@RequestBody     RegisterDTO data) {
 
         if (this.usersRepository.findByLogin(data.login()) != null) {
             return ResponseEntity.badRequest().build();
@@ -58,12 +58,13 @@ public class AuthenticationController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
 
-    public ResponseEntity deleteUser(@PathVariable Integer id){
+    public ResponseEntity<Void> deleteUser(@PathVariable Integer id){
         Optional<UsersModel> usersModelOptional = usersRepository.findById(id);
+        System.out.println("user model optional "+usersModelOptional.get().getLogin());
         if(usersModelOptional.isPresent()){
-            usersRepository.deleteById(id);
+            this.usersRepository.deleteById(id);
             return ResponseEntity.ok().build();
         }else{
             return ResponseEntity.notFound().build();

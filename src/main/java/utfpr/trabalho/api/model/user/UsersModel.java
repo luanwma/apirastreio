@@ -60,8 +60,8 @@ public class UsersModel implements UserDetails {
     private UserRole role;
 
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private ArrayList<Tracking> listTrackings = new ArrayList<>();
+  //  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+   // private ArrayList<Tracking> listTrackings = new ArrayList<>();
 
 
     public UsersModel(String login, String password, UserRole role){

@@ -30,10 +30,11 @@ public class SecurityConfigurations {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "api/user/showAll").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/user/showAll").permitAll()
                         //.requestMatchers(HttpMethod.DELETE , "api/auth/delete/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/user/del").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/auth/del").authenticated()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
