@@ -23,7 +23,7 @@ public class TrackingService implements Serializable {
 
     public String trackingOneObject(String codObject) {
         RestTemplate restTemplate = new RestTemplate();
-        String url = urlBase + "/v1/objetos/" + codObject;
+        String url = urlBase + "/v1/objetos/" + codObject; //QQ177840769BR
 
         return restTemplate.getForObject(url, String.class);
     }

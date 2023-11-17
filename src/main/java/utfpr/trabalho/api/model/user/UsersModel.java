@@ -55,13 +55,18 @@ public class UsersModel implements UserDetails {
     @Column(name = "isActive" ,columnDefinition = "" )
     private boolean isActive;
 
-
     @Column
     private UserRole role;
 
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    private ArrayList<Tracking> listTrackings = new ArrayList<>();
 
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private transient List<Tracking> listTrackings = new ArrayList<>();
   //  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
    // private ArrayList<Tracking> listTrackings = new ArrayList<>();
+
 
 
     public UsersModel(String login, String password, UserRole role){
@@ -69,17 +74,6 @@ public class UsersModel implements UserDetails {
         this.password = password;
         this.role = role;
     }
-
-  /*  public UsersModel(String login, String password, UserRole role,
-                      String cpf, String firstName, String lastName, Date birthDate, String phoneNumber){
-        this.login = login;
-        this.password = password;
-        this.role = role;
-        this.cpf = cpf;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-    }*/
 
     public UsersModel(String cpf, String firstName, String lastName, Date birthDate,
                       String email, String login, String password, String phoneNumber, UserRole role) {
