@@ -1,13 +1,37 @@
-version: '3.1'
+version: '3.8'
 
 services:
 
   db:
+    container_name: postgres-db-teste-composer
     image: postgres
-    restart: always
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
+    networks:
+      - utfpr
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  api:
+    container_name: tracking-api-teste-composer
+    image: docker.io/jeffreyutfpr/tracking-api:latest
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      JDBC_DRIVER: org.postgresql.Driver
+      SERVICE_PROVIDER: utfpr.edu.*
+    depends_on:
+      - db
+    networks:
+      - utfpr
+
+networks:
+  utfpr:
+    name: utfpr
+    driver: bridge
+
+volumes:
+  postgres-data:

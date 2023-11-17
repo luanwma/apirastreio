@@ -8,13 +8,15 @@
 		<version>3.1.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>dio.cursos</groupId>
-	<artifactId>api-rastreamento-manutencao</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>api-rastreamento-manutencao</name>
-	<description>Spring Boot and Lombok</description>
+	<groupId>utfpr.edu</groupId>
+	<artifactId>tracking-api</artifactId>
+	<version>1.0</version>
+	<name>tracking-api</name>
+	<description>tracking-api with correios</description>
 	<properties>
 		<java.version>17</java.version>
+		<docker.image.prefix>jeffreyutfor</docker.image.prefix>
+		<docker.image.name>utfpr</docker.image.name>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -74,15 +76,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-quartz</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-docker-compose</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-
-
-
 	</dependencies>
 
 	<build>
@@ -98,7 +91,6 @@
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
 
