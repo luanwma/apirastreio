@@ -42,7 +42,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
+    public ResponseEntity register(@RequestBody     RegisterDTO data) {
 
         if (this.usersRepository.findByLogin(data.login()) != null) {
             return ResponseEntity.badRequest().build();
@@ -63,6 +63,7 @@ public class AuthenticationController {
 
         if (userOptional.isPresent()) {
             usersRepository.deleteById(id);
+          
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
