@@ -16,6 +16,7 @@ import java.util.List;
 @Entity(name = "tracking")
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Tracking  {
 
     @Id
@@ -44,7 +45,7 @@ public class Tracking  {
     private int timeInterval;
 
     @Column
-    @CreatedDate
+    @CreatedDate()
     private LocalDateTime createdAt;
 
     @Column
@@ -67,6 +68,12 @@ public class Tracking  {
     public void removeEvent(Event event) {
         events.remove(event);
         event.setTracking(null);
+    }
+
+
+    public Tracking(TrackingRequestDTO trackingRequestDTO, UsersModel user){
+        this.codeTracking = trackingRequestDTO.codeTracking();
+        this.user = user;
     }
 
 }
