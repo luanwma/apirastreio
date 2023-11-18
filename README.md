@@ -2,7 +2,9 @@ readme_content = """
 # Tracking API
 
 ## 📖 Descrição
-`tracking-api` é uma aplicação Spring Boot desenvolvida para rastrear encomendas. Utilizando PostgreSQL como sistema de banco de dados, esta aplicação é conteinerizada com Docker, garantindo facilidade na implantação e configuração em diversos ambientes.
+`tracking-api` é uma aplicação Spring Boot desenvolvida para rastrear encomendas. 
+Utilizando PostgreSQL como sistema de banco de dados, esta aplicação é conteinerizada 
+com Docker, garantindo facilidade na implantação e configuração em diversos ambientes.
 
 ## 🚀 Pré-Requisitos
 - **Java 17**
@@ -10,8 +12,11 @@ readme_content = """
 - **Docker**
 - **Docker Compose**
 
-## 🔧 Configuração Local
+## 🔧 Configuração Local:
 
+Configurações default.
+
+- **src/main/resources/application.properties**
 
 ## 🐳 Docker build
 
